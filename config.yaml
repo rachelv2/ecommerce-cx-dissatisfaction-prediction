@@ -1,0 +1,43 @@
+paths:
+  raw_data: data/raw
+  processed_data: data/processed
+
+files:
+  main_dataset: main_dataset.csv
+
+parameters:
+  dissatisfaction_threshold: 2
+
+model:
+  target: is_dissatisfied
+  test_size: 0.2
+  random_state: 42
+
+features:
+  numeric:
+    - delivery_delay
+
+  datetime:
+    - order_purchase_timestamp
+    - order_delivered_customer_date
+    - order_estimated_delivery_date
+
+  id_columns:
+    - order_id
+    - customer_id
+    - customer_unique_id
+
+  drop_before_modeling:
+    - order_id
+    - customer_id
+    - customer_unique_id
+    - order_delivered_customer_date
+    - order_estimated_delivery_date
+    - order_purchase_timestamp
+    - review_score
+  
+  model_features:
+  - delivery_delay
+  - purchase_month
+  - purchase_dayofweek
+  - purchase_hour

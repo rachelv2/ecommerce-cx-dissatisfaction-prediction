@@ -205,3 +205,17 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+data/.DS_Store
+data/raw/Brazilian e-Commerce/olist_customers_dataset.csv
+data/raw/Brazilian e-Commerce/olist_geolocation_dataset.csv
+data/raw/Brazilian e-Commerce/olist_order_items_dataset.csv
+data/raw/Brazilian e-Commerce/olist_order_payments_dataset.csv
+data/raw/Brazilian e-Commerce/olist_order_reviews_dataset.csv
+data/raw/Brazilian e-Commerce/olist_orders_dataset.csv
+data/raw/Brazilian e-Commerce/olist_products_dataset.csv
+data/raw/Brazilian e-Commerce/olist_sellers_dataset.csv
+data/raw/Brazilian e-Commerce/product_category_name_translation.csv
+data/raw/Marketing Funnel/olist_closed_deals_dataset.csv
+data/raw/Marketing Funnel/olist_marketing_qualified_leads_dataset.csv
+data/processed/main_dataset.csv
+.DS_Store
