@@ -3,7 +3,7 @@ Predicting customer dissatisfaction in e-commerce using machine learning to unco
 
 ## Data Source & License
 
-This project uses the Brazilian E-commerce Dataset (Olist) and Marketing Funnel Dataset from Kaggle.
+This project uses the Brazilian E-commerce Dataset (Olist) and Marketing Funnel Dataset (Olist) from Kaggle.
 
 The datasets are licensed under CC BY-NC-SA 4.0.
 They are not included in this repository. Please refer to the original source for access.
