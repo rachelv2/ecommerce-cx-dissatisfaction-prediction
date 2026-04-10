@@ -52,7 +52,11 @@ def clean_axes(ax, grid_axis="y"):
     ax.spines["left"].set_visible(False)
     ax.spines["bottom"].set_visible(False)
 
-    ax.grid(axis=grid_axis, color=LIGHT, linewidth=0.6)
+    if grid_axis in ["x", "y", "both"]:
+        ax.grid(axis=grid_axis, color=LIGHT, linewidth=0.6)
+    else:
+        ax.grid(False)
+
     ax.set_axisbelow(True)
     ax.tick_params(length=0, pad=8)
     ax.margins(x=0.03, y=0.10)
