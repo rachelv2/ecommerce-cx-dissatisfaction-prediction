@@ -1,4 +1,4 @@
-# Predicting and Preventing Customer Dissatisfaction in E-commerce  
+# Predicting Customer Experience Failures in E-commerce (with Implications for Fashion)
 ### Using Customer Experience Data to Identify and Manage Risk
 
 ## Executive Summary
@@ -248,5 +248,5 @@ This positions the analysis as a decision-support tool, showing how dissatisfact
 
 ## Author
 
-Rachel Vianna
+Rachel Vianna,
 Customer Experience & Data Analytics
