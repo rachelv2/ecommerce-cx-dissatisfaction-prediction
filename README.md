@@ -1,4 +1,5 @@
-# E-commerce Customer Experience & Dissatisfaction Prediction
+# Predicting and Preventing Customer Dissatisfaction in E-commerce  
+### Using Customer Experience Data to Identify and Manage Risk
 
 ## Executive Summary
 
@@ -6,52 +7,52 @@ Customer dissatisfaction in e-commerce is often treated as a reactive issue, but
 
 Key findings:
 
-* **Late delivery is the strongest driver of dissatisfaction**, with rates increasing dramatically once orders fall behind expectations
-* **Expectation gaps matter more than absolute timing** — even “on-time” deliveries can generate dissatisfaction when expectations are not met
+* **Late delivery is the strongest driver of dissatisfaction**, with rates increasing sharply once orders fall behind expectations
+* **Expectation gaps drive perception** — even “on-time” deliveries can generate dissatisfaction when expectations are not met
 * **Customer feedback is incomplete**, meaning many negative experiences may go unobserved
 
-Using these insights, a machine learning model was built to identify **high-risk orders before dissatisfaction is expressed**, enabling proactive intervention.
+A predictive model was developed to identify **high-risk orders before dissatisfaction is expressed**, enabling proactive intervention.
 
 Business implications:
 
-* Focus operational efforts on reducing late deliveries
-* Implement **risk-based customer experience interventions**
-* Monitor not only explicit feedback, but also **silent customer segments**
+* Prioritize reducing late deliveries
+* Implement **risk-based CX interventions**
+* Monitor both explicit feedback and **silent customer segments**
 * Align marketing promises with actual delivery performance
 
-This project demonstrates how customer experience analytics can move from **diagnosing problems → predicting risk → guiding action**.
-
-In a real-world setting, this approach could reduce dissatisfaction by enabling teams to intervene before negative experiences are formalized through customer feedback.
+This project demonstrates how CX analytics can move from
+**diagnosing problems → predicting risk → guiding action**,
+enabling teams to intervene before negative experiences are formally expressed.
 
 ---
 
 ## Overview
 
-This project shows how customer dissatisfaction in e-commerce can be predicted and proactively managed by identifying where the post-purchase experience breaks down. 
+This project demonstrates how customer dissatisfaction can be **predicted and proactively managed** by identifying where the post-purchase experience breaks down.
 
-It builds machine learning models to predict at-risk orders, and demonstrates how those predictions can be used in a real business context.
-
-The core idea is that **customer dissatisfaction is not random** — it emerges when the experience delivered falls short of the expectations set before purchase.
-
-This project combines:
+It combines:
 
 * SQL-based data modeling
-* Python-based feature engineering and analysis
-* machine learning for prediction
-* and a prototype showing how insights can drive operational decisions
+* Python-based analysis and feature engineering
+* machine learning for risk prediction
+* a prototype illustrating how insights translate into operational decisions
+
+The underlying principle is simple:
+
+> customer dissatisfaction emerges when delivered experience fails to meet expectations.
 
 ---
 
 ## Business Problem
 
-In e-commerce, customer dissatisfaction is often treated as a reactive issue.
+Customer dissatisfaction is typically addressed after it occurs. This project instead focuses on identifying and managing it **before it escalates**.
 
-This project reframes it as a **predictable outcome of experience gaps**, asking:
+It explores:
 
-* What operational factors drive dissatisfaction?
-* How does delivery performance influence perception?
-* Are there “silent” customers whose experience is not captured in reviews?
-* Can we predict which orders are at risk and intervene proactively?
+* What operational factors drive dissatisfaction
+* How delivery performance shapes customer perception
+* What can be learned from customers who do not leave feedback
+* How to identify and act on high-risk orders
 
 ---
 
@@ -62,9 +63,9 @@ This project uses the **Olist Brazilian E-commerce Dataset** from Kaggle, includ
 * Orders, customers, and reviews
 * Item-level pricing and basket composition
 * Delivery timestamps and estimated delivery dates
-* Marketing funnel data (used as a contextual layer)
+* Marketing funnel data (used as contextual input)
 
-A key nuance:
+A key constraint:
 
 > Not all customers leave reviews, meaning dissatisfaction is only partially observable.
 
@@ -99,23 +100,23 @@ src/
 ### 1. SQL Data Modeling
 
 * Built an order-level analytical dataset from relational tables
-* Joined orders, customers, reviews, and item-level data
+* Combined operational, customer, and review data
 * Preserved missing reviews to reflect real-world feedback gaps
 
 ---
 
 ### 2. Feature Engineering
 
-Key features include:
+Key features:
 
-* **delivery_delay**: difference between actual and estimated delivery
+* **delivery_delay**: actual vs estimated delivery
 * **delivery_deviation_abs**: magnitude of expectation mismatch
 * **order_value & product_count**: order complexity
-* **avg_price_per_item**: price structure
+* **avg_price_per_item**: pricing structure
 * **prior_orders / is_repeat_customer**: customer history
 * **time features**: month and weekday
 
-Two key variables:
+Key variables:
 
 * `has_review` → whether feedback exists
 * `is_dissatisfied` → dissatisfaction among reviewed orders
@@ -124,7 +125,7 @@ Two key variables:
 
 ### 3. Exploratory Data Analysis
 
-The analysis focuses on both:
+The analysis distinguishes between:
 
 * **Observed dissatisfaction**
 * **Silent customers (no review behavior)**
@@ -132,22 +133,21 @@ The analysis focuses on both:
 Key findings:
 
 * Dissatisfaction rate ≈ **13% among reviewed orders**
-* Late deliveries dramatically increase dissatisfaction (~75%)
+* Late deliveries show a sharp increase in dissatisfaction (~75%)
 * Even “on-time” deliveries show elevated dissatisfaction (~28%)
-* Customers who leave reviews differ from those who remain silent
-* Extreme experiences drive written feedback
+* Feedback is biased toward extreme experiences
 
 ---
 
 ### 4. Marketing Context (Strategic Layer)
 
-A separate analysis explores acquisition channels:
+A separate analysis explores acquisition behavior:
 
-* Channels differ in conversion behavior
+* Different channels show different conversion patterns
 * Suggests expectations are shaped before purchase
-* Not causally linked to dissatisfaction (data limitation), but provides context
+* Not directly linked to dissatisfaction (data limitation), but provides context
 
-This extends the customer journey view:
+This extends the journey view:
 
 > acquisition → expectation → experience → evaluation
 
@@ -155,101 +155,77 @@ This extends the customer journey view:
 
 ### 5. Machine Learning Modeling
 
-A predictive model was developed to identify orders at risk of customer dissatisfaction.
+A predictive model was developed to identify orders at risk of dissatisfaction.
 
-#### Models built:
+Models tested:
 
-* Logistic Regression (baseline, interpretable)
-* Random Forest (captures non-linear patterns)
+* Logistic Regression
+* Random Forest
 * Gradient Boosting (best performance)
 
-#### Techniques:
+Approach:
 
 * Train/test split with stratification
 * Hyperparameter tuning (RandomizedSearchCV)
-* Evaluation using:
+* Evaluation using ROC-AUC, Recall, and F1-score
 
-  * ROC-AUC
-  * Recall (dissatisfied class)
-  * F1-score
+Key result:
 
-#### Outcome:
-
-* Gradient Boosting selected as best model
-* Delivery-related features are the strongest predictors
+> Delivery-related features are the strongest predictors of dissatisfaction.
 
 ---
 
-### 6. Application Prototype (SFS Case Study)
+### 6. Application Prototype (Operational CX Use Case)
 
-The final notebook demonstrates how the model could be used in a real business setting.
+The final notebook demonstrates how model predictions can be used operationally to manage customer experience risk.
 
-It shows how predicted dissatisfaction risk can be operationalized to support decision-making.
+In practice, these insights could inform fulfillment strategies such as Ship From Store (SFS), where faster or alternative fulfillment options help reduce delivery-related dissatisfaction.
 
-This includes:
+It simulates:
 
 * flagging high-risk orders
 * prioritizing delayed shipments
 * triggering proactive communication
 * guiding service recovery actions
 
-This shifts the project from:
-
-> **prediction → action**
-
-and frames it as a **decision-support tool for customer experience teams**.
+This positions the analysis as a decision-support tool, showing how dissatisfaction risk signals can be translated into concrete operational actions.
 
 ---
 
 ## Key Insights
 
-### 1. Delivery performance is the dominant driver
+1. **Delivery performance is the primary failure point**
+   Late delivery is the strongest and most consistent driver of dissatisfaction
 
-Late delivery sharply increases dissatisfaction.
+2. **Expectation gaps drive dissatisfaction**
+   Customer perception is shaped by how reality compares to expectations
 
-### 2. Expectation gaps matter
+3. **Feedback is incomplete**
+   Many negative experiences are not captured in review data
 
-Customer dissatisfaction is driven by expectation gaps, not just operational failures.
+4. **Customer experience is end-to-end**
+   Perception is shaped across the full journey:
 
-### 3. Customer feedback is incomplete
-
-Many customers do not leave reviews, meaning:
-
-> observed dissatisfaction ≠ total dissatisfaction
-
-### 4. Experience is end-to-end
-
-Customer perception is shaped across the full journey:
-
-> acquisition → expectation → delivery → evaluation
+   > acquisition → expectation → delivery → evaluation
 
 ---
 
 ## Business Recommendations
 
-### 1. Reduce late deliveries (highest impact)
+1. **Reduce late deliveries (highest impact)**
+   Focus operational improvements where dissatisfaction risk is highest
 
-Late delivery is the primary operational driver of dissatisfaction.
+2. **Implement risk-based interventions**
+   Use model predictions to proactively manage at-risk orders
 
-### 2. Implement risk-based intervention
+3. **Align expectations with operations**
+   Ensure delivery promises reflect actual performance
 
-Use model predictions to:
+4. **Monitor silent customers**
+   Avoid relying solely on explicit feedback
 
-* flag high-risk orders
-* prioritize proactive communication
-* trigger service recovery workflows
-
-### 3. Focus on expectation management
-
-Align delivery promises with actual operational performance to reduce expectation-driven dissatisfaction.
-
-### 4. Monitor silent customers
-
-Do not rely only on review data to assess customer experience.
-
-### 5. Integrate CX into operations
-
-Use analytics to guide real-time decision-making, as demonstrated in the prototype.
+5. **Integrate CX into operations**
+   Use analytics to guide real-time decisions, as demonstrated in the prototype
 
 ---
 
@@ -263,9 +239,9 @@ Use analytics to guide real-time decision-making, as demonstrated in the prototy
 
 ## Future Work
 
-* Build an early-warning model using only pre-delivery features
+* Build a pre-delivery early-warning model
 * Incorporate NLP analysis of review text
-* Link acquisition channels to downstream experience
+* Link acquisition channels to downstream outcomes
 * Deploy a real-time CX monitoring system
 
 ---
