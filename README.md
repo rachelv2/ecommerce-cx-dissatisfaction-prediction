@@ -26,6 +26,13 @@ enabling teams to intervene before negative experiences are formally expressed.
 
 ---
 
+## Visuals
+
+* **Presentation:** https://prezi.com/view/4fYvcpvVigy9gldgtHFK/
+* **Tableau:** https://public.tableau.com/views/cx-ecommerce-analysis/04PredictiveRisk?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+
+---
+
 ## Overview
 
 This project demonstrates how customer dissatisfaction can be **predicted and proactively managed** by identifying where the post-purchase experience breaks down, using e-commerce customer experience data.
