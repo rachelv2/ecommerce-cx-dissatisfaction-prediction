@@ -219,3 +219,5 @@ data/raw/Marketing Funnel/olist_closed_deals_dataset.csv
 data/raw/Marketing Funnel/olist_marketing_qualified_leads_dataset.csv
 data/processed/main_dataset.csv
 .DS_Store
+data/processed/final_tableau_dataset.csv
+data/processed/final_tableau_dataset.csv
